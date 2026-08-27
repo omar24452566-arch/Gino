@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Gino Speciality Coffee · The Italian Art of Coffee | Alexandria</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        'gc-obsidian': '#070605',
+        'gc-roast': '#110D0A',
+        'gc-card': '#16120D',
+        'gc-border': '#2D2319',
+        'gc-crema': '#C99E66',
+        'gc-caramel': '#E2AA6E',
+        'gc-copper': '#9E6D38',
+        'gc-foam': '#FAF6F0',
+        'gc-dim': '#988A7C'
+      }
+    }
+  }
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root { --font-title: 'Playfair Display', Georgia, serif; --font-body: 'Plus Jakarta Sans', sans-serif; }
+  html.lang-ar { --font-title: 'Cairo', sans-serif; --font-body: 'Cairo', sans-serif; }
+  * { box-sizing: border-box; }
+  body { font-family: var(--font-body); background-color: #070605; color: #FAF6F0; letter-spacing: -0.01em; }
+  .title-font { font-family: var(--font-title); }
+
+  .ambient-glow {
+    background: radial-gradient(circle at 50% -12%, rgba(201, 158, 102, 0.22) 0%, rgba(7, 6, 5, 0) 70%), #070605;
+  }
+  .card-crema {
+    background: #140F0B;
+    border: 1px solid #2D2319;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card-crema:hover {
+    transform: translateY(-4px);
+    border-color: rgba(201, 158, 102, 0.55);
+    box-shadow: 0 24px 48px -15px rgba(0,0,0,0.95), 0 0 25px rgba(201, 158, 102, 0.1);
+  }
+
+  .btn-gold {
+    background: linear-gradient(135deg, #E2AA6E 0%, #C99E66 50%, #9E6D38 100%);
+    color: #070605;
+    font-weight: 800;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    box-shadow: 0 10px 28px -4px rgba(201, 158, 102, 0.45);
+  }
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px -2px rgba(201, 158, 102, 0.65);
+    filter: brightness(1.06);
+  }
+  .btn-gold:active { transform: scale(0.98); }
+
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: #10B981;
+    box-shadow: 0 0 12px #10B981;
+    animation: livePulse 2s infinite ease-in-out;
+  }
+  @keyframes livePulse {
+    0%, 100% { transform: scale(0.9); opacity: 0.85; }
+    50% { transform: scale(1.4); opacity: 1; }
+  }
+
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .marquee-track { animation: marquee 24s linear infinite; }
+  html[dir="rtl"] .marquee-track { animation-direction: reverse; }
+</style>
+</head>
+<body class="antialiased selection:bg-gc-crema selection:text-gc-obsidian pb-24 md:pb-0">
+
+<!-- ============ FLOATING BARISTA NAV ============ -->
+<nav class="fixed top-0 w-full z-50 bg-[#070605]/90 backdrop-blur-2xl border-b border-gc-border">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    
+    <a href="#home" class="flex items-center gap-3 group">
+      <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-gc-caramel to-gc-crema text-gc-obsidian font-black text-2xl flex items-center justify-center title-font shadow-lg transition-transform duration-300 group-hover:scale-105">
+        G
+      </div>
+      <div>
+        <div class="title-font text-xl font-bold text-gc-foam leading-tight tracking-tight">
+          Gino <span class="text-gc-crema font-normal italic">Speciality Coffee</span>
+        </div>
+        <div class="flex items-center gap-1.5 text-[10px] text-gc-dim font-bold mt-0.5">
+          <span class="live-dot"></span>
+          <span data-i18n="navStatus">Bar Active · 7:00 AM – 2:00 AM</span>
+        </div>
+      </div>
+    </a>
+
+    <div class="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest font-bold text-gc-dim">
+      <a href="#craft" class="hover:text-gc-crema transition" data-i18n="navCraft">Extraction Stage</a>
+      <a href="#signatures" class="hover:text-gc-crema transition" data-i18n="navSig">Signatures</a>
+      <a href="#menu" class="hover:text-gc-crema transition" data-i18n="navMenu">Menu & Bakery</a>
+      <a href="#visit" class="hover:text-gc-crema transition" data-i18n="navContact">Location & Hours</a>
+    </div>
+
+    <div class="flex items-center gap-2.5">
+      <button onclick="toggleLang()" class="px-3.5 py-1.5 rounded-xl border border-gc-border bg-gc-roast text-xs font-bold text-gc-foam hover:border-gc-crema transition flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5 text-gc-crema" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20 15 15 0 010-20z"/></svg>
+        <span id="langBtnLabel">العربية</span>
+      </button>
+
+      <button onclick="toggleCart(true)" class="relative px-4 py-2 rounded-xl bg-gc-crema text-gc-obsidian font-black text-xs flex items-center gap-2 transition hover:bg-gc-caramel shadow-md">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M1 1h4l2.4 12.4a2 2 0 002 1.6h9.2a2 2 0 002-1.6L23 6H6"/></svg>
+        <span data-i18n="navCart">Order</span>
+        <span id="cartCount" class="w-5 h-5 rounded-full bg-gc-obsidian text-gc-crema text-[11px] font-black flex items-center justify-center">0</span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ============ HERO EDITORIAL ============ -->
+<section id="home" class="ambient-glow pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      
+      <div class="lg:col-span-7 text-left rtl:text-right">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gc-roast border border-gc-border mb-5">
+          <span class="live-dot"></span>
+          <span class="text-xs font-semibold text-gc-foam" data-i18n="heroPill">The Italian Art of Coffee · Alexandria</span>
+        </div>
+
+        <h1 class="title-font text-4xl sm:text-6xl lg:text-7xl font-bold text-gc-foam leading-[1.12] mb-5">
+          <span data-i18n="heroTitleA">Roasted with Precision,</span><br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-gc-caramel via-gc-crema to-[#FAF6EE] italic font-normal" data-i18n="heroTitleB">
+            brewed just for you.
+          </span>
+        </h1>
+
+        <p class="text-base sm:text-lg text-gc-dim max-w-xl leading-relaxed mb-8 font-medium" data-i18n="heroDesc">
+          Fresh specialty Arabica pulled to order, chilled signature brews, and warm French butter pastries.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 max-w-md">
+          <a href="#menu" class="px-8 py-4 btn-gold rounded-2xl text-center text-sm flex items-center justify-center gap-2">
+            <span>☕</span> <span data-i18n="heroBtnOrder">Explore Menu & Order</span>
+          </a>
+          <a href="#craft" class="px-6 py-4 bg-gc-roast border border-gc-border hover:border-gc-crema text-gc-foam font-bold rounded-2xl text-center text-sm transition flex items-center justify-center gap-2">
+            <span>✨</span> <span data-i18n="heroBtnSig">The Extraction Stage</span>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 mt-12 pt-6 border-t border-gc-border max-w-md">
+          <div>
+            <div class="title-font text-2xl sm:text-3xl font-bold text-gc-crema">100%</div>
+            <div class="text-xs text-gc-dim font-semibold mt-0.5" data-i18n="statBeans">Specialty Arabica</div>
+          </div>
+          <div class="border-x border-gc-border px-3">
+            <div class="title-font text-2xl sm:text-3xl font-bold text-gc-crema">7:00 AM</div>
+            <div class="text-xs text-gc-dim font-semibold mt-0.5" data-i18n="statOpen">Early Morning Bar</div>
+          </div>
+          <div>
+            <div class="title-font text-2xl sm:text-3xl font-bold text-gc-crema">0%</div>
+            <div class="text-xs text-gc-dim font-semibold mt-0.5" data-i18n="statDirect">App Markup Fees</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 relative">
+        <div class="relative rounded-3xl overflow-hidden border border-gc-border shadow-2xl bg-gc-card p-2.5">
+          <img 
+            src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=1000&auto=format&fit=crop" 
+            alt="Gino Specialty Iced Spanish Latte" 
+            class="w-full h-[360px] sm:h-[440px] object-cover rounded-2xl"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-gc-obsidian via-transparent to-transparent pointer-events-none"></div>
+          
+          <div class="absolute bottom-5 inset-x-5 p-4 rounded-2xl bg-gc-obsidian/95 border border-gc-crema/40 backdrop-blur-xl flex items-center justify-between shadow-2xl">
+            <div>
+              <div class="text-[10px] font-black text-gc-crema uppercase tracking-widest" data-i18n="floatCardTag">Signature Cup</div>
+              <div class="title-font text-lg font-bold text-gc-foam mt-0.5" data-i18n="floatCardTitle">Iced Spanish Latte</div>
+            </div>
+            <button onclick="addToCart(1)" class="px-4 py-2 rounded-xl bg-gc-crema text-gc-obsidian font-black text-xs hover:bg-gc-caramel transition">
+              + 85 EGP
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE TICKER ============ -->
+<div class="overflow-hidden bg-gc-roast border-y border-gc-border py-3 select-none">
+  <div class="flex marquee-track whitespace-nowrap text-xs font-bold uppercase text-gc-crema tracking-wider" id="tickerRow"></div>
+</div>
+
+<!-- ============ THE 3D EXTRACTION STAGE ============ -->
+<section id="craft" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#080706] to-[#120D09]">
+  <div class="max-w-6xl mx-auto">
+    
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gc-card border border-gc-border mb-3">
+        <span class="w-2 h-2 rounded-full bg-gc-crema animate-pulse"></span>
+        <span class="text-[11px] font-bold text-gc-crema uppercase tracking-widest" data-i18n="craftTag">Barista Vault</span>
+      </div>
+      <h2 class="title-font text-3xl sm:text-5xl font-bold text-gc-foam" data-i18n="craftTitle">The 3D Extraction Stage</h2>
+      <p class="text-xs sm:text-sm text-gc-dim mt-2 max-w-lg mx-auto" data-i18n="craftSub">
+        Watch our 18g double shot extract golden crema over chilled micro-foam in real time.
+      </p>
+    </div>
+
+    <!-- Extraction Showcase Card -->
+    <div class="card-crema rounded-3xl p-6 sm:p-10 border-gc-crema/40 relative overflow-hidden shadow-2xl">
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Video Player with Multi-Source Fallbacks -->
+        <div class="lg:col-span-7 relative h-72 sm:h-[420px] rounded-2xl overflow-hidden bg-gc-obsidian border border-gc-border shadow-2xl">
+          <video 
+            id="coffeeExtractionVid"
+            autoplay 
+            muted 
+            loop 
+            playsinline 
+            webkit-playsinline
+            preload="auto"
+            poster="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=1000&auto=format&fit=crop"
+            class="w-full h-full object-cover"
+          >
+            <source src="Espresso_pouring_into_iced_milk_202608271411_3.mp4" type="video/mp4">
+            <source src="Espresso_pouring_into_iced_milk_202608271411_2.mp4" type="video/mp4">
+            <source src="Espresso_pouring_into_iced_milk_202608271411.mp4" type="video/mp4">
+            <source src="gino-extraction.mp4" type="video/mp4">
+            <source src="video.mp4" type="video/mp4">
+          </video>
+          
+          <div class="absolute top-3.5 left-3.5 rtl:left-auto rtl:right-3.5 px-3 py-1 bg-gc-obsidian/90 backdrop-blur-md border border-gc-crema/40 text-gc-crema font-bold text-[10px] uppercase tracking-wider rounded-lg z-10">
+            ⚡ Bottomless Portafilter · 1:2 Ratio
+          </div>
+
+          <div class="absolute bottom-3.5 inset-x-3.5 p-3 rounded-xl bg-gc-obsidian/90 backdrop-blur-md border border-gc-border flex items-center justify-between z-10">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span class="text-xs font-semibold text-gc-foam" data-i18n="extractionLive">Live Extraction Flow</span>
+            </div>
+            <span class="title-font text-xs font-bold text-gc-crema">28s @ 9 Bar</span>
+          </div>
+        </div>
+
+        <!-- Tasting Matrix & Direct Action -->
+        <div class="lg:col-span-5 flex flex-col justify-between h-full py-2 text-left rtl:text-right">
+          <div>
+            <span class="text-[10px] font-black text-gc-crema uppercase tracking-widest" data-i18n="originTag">Origin Profile</span>
+            <h3 class="title-font text-2xl sm:text-3xl font-bold text-gc-foam mt-1 mb-3" data-i18n="vaultHeading">
+              Ethiopia Yirgacheffe & Colombia Geisha
+            </h3>
+            
+            <p class="text-xs text-gc-dim leading-relaxed mb-6" data-i18n="vaultDesc">
+              Dosed to exact 0.1g tolerances. High-grown Arabica roasted to unlock notes of wild jasmine, bergamot citrus, and velvety dark cocoa.
+            </p>
+
+            <div class="grid grid-cols-2 gap-2.5 mb-6 text-xs">
+              <div class="p-3 rounded-xl bg-gc-roast border border-gc-border">
+                <div class="text-[10px] text-gc-dim font-bold uppercase" data-i18n="spec1Label">Elevation</div>
+                <div class="title-font font-bold text-gc-foam mt-0.5">1,950m – 2,200m</div>
+              </div>
+              <div class="p-3 rounded-xl bg-gc-roast border border-gc-border">
+                <div class="text-[10px] text-gc-dim font-bold uppercase" data-i18n="spec2Label">Process</div>
+                <div class="title-font font-bold text-gc-foam mt-0.5" data-i18n="spec2Val">Washed & Anaerobic</div>
+              </div>
+              <div class="p-3 rounded-xl bg-gc-roast border border-gc-border">
+                <div class="text-[10px] text-gc-dim font-bold uppercase" data-i18n="spec3Label">Roast Profile</div>
+                <div class="title-font font-bold text-gc-foam mt-0.5" data-i18n="spec3Val">Italian Medium-Light</div>
+              </div>
+              <div class="p-3 rounded-xl bg-gc-roast border border-gc-border">
+                <div class="text-[10px] text-gc-dim font-bold uppercase" data-i18n="spec4Label">Direct WhatsApp</div>
+                <div class="title-font font-bold text-emerald-400 mt-0.5">0% App Markup</div>
+              </div>
+            </div>
+          </div>
+
+          <button onclick="addToCart(4)" class="w-full py-4 btn-gold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+            <span>☕</span> <span data-i18n="vaultOrderBtn">Order Single Origin V60 (75 EGP)</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ SIGNATURES ============ -->
+<section id="signatures" class="py-16 px-4 sm:px-6 lg:px-8 border-t border-gc-border">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-10">
+      <span class="px-3.5 py-1 rounded-full bg-gc-crema/15 border border-gc-crema/40 text-gc-crema font-bold text-xs uppercase tracking-wider" data-i18n="sigBadge">
+        Barista's Curation
+      </span>
+      <h2 class="title-font text-3xl sm:text-4xl font-bold text-gc-foam mt-2" data-i18n="sigTitle">
+        Signature Extractions
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="card-crema rounded-3xl p-6 flex flex-col justify-between">
+        <div>
+          <div class="relative h-56 rounded-2xl overflow-hidden bg-gc-roast border border-gc-border mb-5">
+            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=800&auto=format&fit=crop" alt="Pistachio Latte" class="w-full h-full object-cover">
+            <span class="absolute top-3 right-3 rtl:right-auto rtl:left-3 px-3 py-1 bg-gc-crema text-gc-obsidian font-black text-[10px] rounded-lg">
+              ✨ VELVET FOAM
+            </span>
+          </div>
+          <div class="flex justify-between items-baseline mb-2">
+            <h3 class="title-font text-xl font-bold text-gc-foam" data-i18n="sig1Title">Iced Pistachio Latte</h3>
+            <span class="title-font text-xl font-bold text-gc-crema">95 EGP</span>
+          </div>
+          <p class="text-xs text-gc-dim leading-relaxed mb-4" data-i18n="sig1Desc">
+            Pure natural pistachio reduction layered with cold whole milk and freshly pulled double espresso over crystal ice.
+          </p>
+        </div>
+        <button onclick="addToCart(2)" class="w-full py-3.5 btn-gold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+          <span>+</span> <span data-i18n="btnAddToCart">Add to Order (95 EGP)</span>
+        </button>
+      </div>
+
+      <div class="card-crema rounded-3xl p-6 flex flex-col justify-between">
+        <div>
+          <div class="relative h-56 rounded-2xl overflow-hidden bg-gc-roast border border-gc-border mb-5">
+            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=800&auto=format&fit=crop" alt="French Croissant" class="w-full h-full object-cover">
+            <span class="absolute top-3 right-3 rtl:right-auto rtl:left-3 px-3 py-1 bg-gc-crema text-gc-obsidian font-black text-[10px] rounded-lg">
+              🥐 BAKED FRESH 6:00 AM
+            </span>
+          </div>
+          <div class="flex justify-between items-baseline mb-2">
+            <h3 class="title-font text-xl font-bold text-gc-foam" data-i18n="sig2Title">French Butter Croissant</h3>
+            <span class="title-font text-xl font-bold text-gc-crema">55 EGP</span>
+          </div>
+          <p class="text-xs text-gc-dim leading-relaxed mb-4" data-i18n="sig2Desc">
+            Flaky, golden layered pastry baked fresh daily with pure French butter to complement your morning espresso.
+          </p>
+        </div>
+        <button onclick="addToCart(5)" class="w-full py-3.5 btn-gold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+          <span>+</span> <span data-i18n="btnAddToCart">Add to Order (55 EGP)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU SECTION ============ -->
+<section id="menu" class="py-16 px-4 sm:px-6 lg:px-8 bg-gc-roast/40 border-t border-gc-border">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-8">
+      <p class="text-gc-crema font-bold text-xs uppercase tracking-widest mb-1" data-i18n="menuEyebrow">Direct Espresso Bar</p>
+      <h2 class="title-font text-3xl sm:text-4xl font-bold text-gc-foam" data-i18n="menuTitle">Today's Coffee & Bakery</h2>
+    </div>
+
+    <div id="filterRow" class="flex flex-wrap items-center justify-center gap-2 mb-10"></div>
+    <div id="menuGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+  </div>
+</section>
+
+<!-- ============ LOCATION & CONTACT ============ -->
+<section id="visit" class="py-16 px-4 sm:px-6 lg:px-8 border-t border-gc-border bg-gc-roast/20">
+  <div class="max-w-5xl mx-auto text-center">
+    <h2 class="title-font text-2xl sm:text-3xl font-bold text-gc-foam mb-6" data-i18n="contactHeading">Visit Us or Order Direct</h2>
+
+    <div class="grid sm:grid-cols-3 gap-4 mb-8">
+      <div class="card-crema p-6 rounded-2xl">
+        <div class="text-xs text-gc-dim font-bold mb-1" data-i18n="cntPhoneLabel">Direct Order Line & WhatsApp</div>
+        <a href="tel:+201006893004" class="title-font text-xl font-bold text-gc-crema hover:underline">01006893004</a>
+      </div>
+      <div class="card-crema p-6 rounded-2xl">
+        <div class="text-xs text-gc-dim font-bold mb-1" data-i18n="cntLocLabel">Location</div>
+        <div class="text-sm font-semibold text-gc-foam">Alexandria, Egypt</div>
+      </div>
+      <div class="card-crema p-6 rounded-2xl">
+        <div class="text-xs text-gc-dim font-bold mb-1" data-i18n="cntHoursLabel">Operating Hours</div>
+        <div class="text-sm font-bold text-gc-crema" data-i18n="cntHoursVal">Daily 7:00 AM – 2:00 AM</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MOBILE STICKY ORDER BAR ============ -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 p-3 bg-[#080706]/95 backdrop-blur-xl border-t border-gc-border z-40 flex items-center justify-between gap-3 shadow-2xl">
+  <div>
+    <div class="text-[10px] text-gc-dim font-bold" data-i18n="mobBarTotal">Order Subtotal:</div>
+    <div id="mobileBarPrice" class="title-font text-lg font-bold text-gc-crema leading-none">0 EGP</div>
+  </div>
+  <button onclick="toggleCart(true)" class="flex-1 py-3 btn-gold rounded-xl text-xs flex items-center justify-center gap-2">
+    <span>☕</span> <span data-i18n="mobBarBtn">Review & Send to WhatsApp</span>
+  </button>
+</div>
+
+<!-- ============ CART DRAWER ============ -->
+<div id="cartOverlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[70] opacity-0 pointer-events-none transition-opacity duration-300" onclick="toggleCart(false)"></div>
+<div id="cartDrawer" class="fixed top-0 right-0 rtl:right-auto rtl:left-0 h-full w-full sm:w-[400px] bg-gc-card border-l rtl:border-l-0 rtl:border-r border-gc-border z-[71] transform translate-x-full rtl:-translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+  
+  <div class="flex items-center justify-between p-5 border-b border-gc-border">
+    <h3 class="title-font text-lg font-bold text-gc-foam" data-i18n="cartTitle">Your Gino Order</h3>
+    <button onclick="toggleCart(false)" class="p-1.5 text-gc-dim hover:text-gc-foam" aria-label="Close">✕</button>
+  </div>
+  
+  <div id="cartItems" class="flex-1 overflow-y-auto p-5 space-y-3"></div>
+
+  <div id="cartFooter" class="p-5 border-t border-gc-border bg-gc-roast" style="display:none">
+    <div class="flex justify-between items-baseline mb-4">
+      <span class="text-xs font-bold text-gc-dim" data-i18n="cartSubtotal">Subtotal:</span>
+      <span id="cartSubtotal" class="title-font text-2xl font-bold text-gc-crema">0 EGP</span>
+    </div>
+    <button onclick="submitOrderViaWhatsApp()" class="w-full py-4 btn-gold rounded-xl text-xs flex items-center justify-center gap-2">
+      <span>📱</span> <span data-i18n="cartSendBtn">Send Order to Barista via WhatsApp</span>
+    </button>
+  </div>
+
+</div>
+
+<script>
+let currentLang = 'en';
+let cart = [];
+let activeFilter = 'all';
+
+const dict = {
+  en: {
+    navStatus: "Bar Active · 7:00 AM – 2:00 AM",
+    navSig: "Signatures",
+    navMenu: "Menu & Bakery",
+    navCraft: "Extraction Stage",
+    navContact: "Location & Hours",
+    navCart: "Order",
+    heroPill: "The Italian Art of Coffee · Alexandria",
+    heroTitleA: "Roasted with Precision,",
+    heroTitleB: "brewed just for you.",
+    heroDesc: "Fresh specialty Arabica pulled to order, chilled signature brews, and warm French butter pastries.",
+    heroBtnOrder: "Explore Menu & Order",
+    heroBtnSig: "The Extraction Stage",
+    statBeans: "Specialty Arabica",
+    statOpen: "Early Morning Bar",
+    statDirect: "App Markup Fees",
+    floatCardTag: "Signature Cup",
+    floatCardTitle: "Iced Spanish Latte",
+    craftTag: "Barista Vault",
+    craftTitle: "The 3D Extraction Stage",
+    craftSub: "Watch our 18g double shot extract golden crema over chilled micro-foam in real time.",
+    extractionLive: "Live Extraction Flow",
+    originTag: "Origin Profile",
+    vaultHeading: "Ethiopia Yirgacheffe & Colombia Geisha",
+    vaultDesc: "Dosed to exact 0.1g tolerances. High-grown Arabica roasted to unlock notes of wild jasmine, bergamot citrus, and velvety dark cocoa.",
+    spec1Label: "Elevation",
+    spec2Label: "Process",
+    spec2Val: "Washed & Anaerobic",
+    spec3Label: "Roast Profile",
+    spec3Val: "Italian Medium-Light",
+    spec4Label: "Direct WhatsApp",
+    vaultOrderBtn: "Order Single Origin V60 (75 EGP)",
+    sigBadge: "Barista's Curation",
+    sigTitle: "Signature Extractions",
+    sig1Title: "Iced Pistachio Latte",
+    sig1Desc: "Pure natural pistachio reduction layered with cold whole milk and freshly pulled double espresso over crystal ice.",
+    sig2Title: "French Butter Croissant",
+    sig2Desc: "Flaky, golden layered pastry baked fresh daily with pure French butter to complement your morning espresso.",
+    btnAddToCart: "Add to Order",
+    menuEyebrow: "Direct Espresso Bar",
+    menuTitle: "Today's Coffee & Bakery",
+    contactHeading: "Visit Us or Order Direct",
+    cntPhoneLabel: "Direct Order Line & WhatsApp",
+    cntLocLabel: "Location",
+    cntHoursLabel: "Operating Hours",
+    cntHoursVal: "Daily 7:00 AM – 2:00 AM",
+    mobBarTotal: "Order Subtotal:",
+    mobBarBtn: "Review & Send to WhatsApp",
+    cartTitle: "Your Gino Order",
+    cartSubtotal: "Subtotal:",
+    cartSendBtn: "Send Order to Barista via WhatsApp",
+    catAll: "All Items",
+    ticker: ["☕ The Italian Art of Coffee", "🥐 Artisanal Butter Croissants", "🧊 Signature Iced Spanish Lattes", "🕐 Open Daily 7:00 AM – 2:00 AM", "🛵 Fast Direct Pickup & Delivery"]
+  },
+  ar: {
+    navStatus: "مفتوح يومياً · 7:00 ص إلى 2:00 ص",
+    navSig: "المميز",
+    navMenu: "المنيو والمخبوزات",
+    navCraft: "طريقة الاستخلاص",
+    navContact: "العنوان والتواصل",
+    navCart: "الطلب",
+    heroPill: "فن القهوة الإيطالية · جينو كوفي",
+    heroTitleA: "فن القهوة الإيطالية،",
+    heroTitleB: "محمصة ومحضرة لمزاجك.",
+    heroDesc: "بن مختص طازة، مشروبات مثلجة منعشة، ومخبوزات بالزبدة الفرنسية من الصبح بدري.",
+    heroBtnOrder: "تصفح المنيو واطلب",
+    heroBtnSig: "عرض الاستخلاص",
+    statBeans: "حبوب بن أرابيكا",
+    statOpen: "شغالين من الصبح",
+    statDirect: "عمولة طلب مباشر",
+    floatCardTag: "المشروب المميز",
+    floatCardTitle: "سبانش لاتيه مثلج",
+    craftTag: "معايير الباريستا",
+    craftTitle: "عرض الاستخلاص ثلاثي الأبعاد",
+    craftSub: "شوف بنفسك استخلاص شوت الإسبريسو الدبل والكريما الغنية على الحليب المثلج.",
+    extractionLive: "استخلاص مباشر طازة",
+    originTag: "بلد المنشأ",
+    vaultHeading: "إثيوبيا ييرجاتشيفي وكولومبيا جيزا",
+    vaultDesc: "معايرة دقيقة بوزن 0.1 جرام. بن أرابيكا يبرز إيحاءات زهور الياسمين والحمضيات مع لمسة كاكاو داكن ناعمة.",
+    spec1Label: "الارتفاع عن البحر",
+    spec2Label: "المعالجة",
+    spec2Val: "مغسولة ولا هوائية",
+    spec3Label: "درجة التحميص",
+    spec3Val: "إيطالي متوسط-فاتح",
+    spec4Label: "طلب مباشر",
+    vaultOrderBtn: "اطلب V60 بن مختص (75 ج.م)",
+    sigBadge: "اختيار الباريستا",
+    sigTitle: "مشروبات جينو المميزة",
+    sig1Title: "آيس بستاشيو لاتيه",
+    sig1Desc: "صوص فستق طبيعي نقي مع حليب مثلج ودبل شوت إسبريسو مختص طازة.",
+    sig2Title: "كرواسون فرنسي بالزبدة",
+    sig2Desc: "مخبوز طازة يومياً من 6 الصبح بالزبدة الفرنسية الطبيعية مع فنجان قهوتك الصباحي.",
+    btnAddToCart: "إضافة للطلب",
+    menuEyebrow: "بار القهوة المباشر",
+    menuTitle: "منيو جينو كوفي والمخبوزات",
+    contactHeading: "العنوان ومواعيد العمل",
+    cntPhoneLabel: "الطلب المباشر والواتساب",
+    cntLocLabel: "الموقع",
+    cntHoursLabel: "مواعيد العمل",
+    cntHoursVal: "يومياً من 7:00 صباحاً إلى 2:00 صباحاً",
+    mobBarTotal: "إجمالي الطلب:",
+    mobBarBtn: "تأكيد الطلب على الواتساب",
+    cartTitle: "طلبك من Gino Coffee",
+    cartSubtotal: "الإجمالي:",
+    cartSendBtn: "إرسال الطلب لواتساب الباريستا",
+    catAll: "جميع الأصناف",
+    ticker: ["☕ The Italian Art of Coffee", "🥐 كرواسون بالزبدة طازة يومياً", "🧊 سبانش لاتيه وكولد برو مثلج", "🕐 مفتوح يومياً من 7:00 ص إلى 2:00 ص", "🛵 استلام سريع وتوصيل مباشر"]
+  }
+};
+
+const categories = {
+  iced: { en: "Iced & Cold Brews", ar: "مشروبات مثلجة وساقعة" },
+  hot: { en: "Hot Coffee & Espresso", ar: "قهوة وإسبريسو ساخن" },
+  bakery: { en: "Bakery & Sweets", ar: "مخبوزات وحلويات" }
+};
+const catOrder = ["all", "iced", "hot", "bakery"];
+
+const dishes = [
+  {
+    id: 1,
+    name: { en: "Gino Iced Spanish Latte", ar: "آيس سبانش لاتيه جينو" },
+    desc: { en: "Double ristretto espresso, sweetened condensed milk, chilled milk over ice.", ar: "دبل ريستريتو إسبريسو مع حليب مكثف محلى وحليب بارد مثلج." },
+    price: 85,
+    catKey: "iced",
+    tag: { en: "Best Seller", ar: "الأكثر طلباً" },
+    img: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    id: 2,
+    name: { en: "Iced Pistachio Latte", ar: "آيس بستاشيو لاتيه" },
+    desc: { en: "Specialty espresso layered with pure natural pistachio paste and cold milk.", ar: "إسبريسو مختص مع صوص الفستق الطبيعي الفاخر وحليب مثلج." },
+    price: 95,
+    catKey: "iced",
+    tag: { en: "Signature", ar: "مميز" },
+    img: "https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    id: 3,
+    name: { en: "Classic Italian Flat White", ar: "فلات وايت إيطالي كلاسيك" },
+    desc: { en: "Double ristretto shot finished with velvety smooth whole milk microfoam.", ar: "ريستريتو مزدوج غني بطبقة ميكروفوم حليب مخملي." },
+    price: 65,
+    catKey: "hot",
+    tag: { en: "Classic", ar: "كلاسيك" },
+    img: "https://images.unsplash.com/photo-1577968897966-3d4325b36b61?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    id: 4,
+    name: { en: "Single Origin V60 Pour-Over", ar: "قهوة مقطرة V60 إثيوبية" },
+    desc: { en: "Manual slow drip extraction highlighting clean floral and citrus notes.", ar: "استخلاص يدوي نقي يبرز إيحاءات الفواكه والزهور في البن." },
+    price: 75,
+    catKey: "hot",
+    tag: { en: "Specialty", ar: "بن مختص" },
+    img: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    id: 5,
+    name: { en: "French Pure Butter Croissant", ar: "كرواسون فرنسي بالزبدة" },
+    desc: { en: "Flaky, golden layered pastry baked fresh daily with pure French butter.", ar: "مورق ومخبوز طازة يومياً من الزبدة الطبيعية الفاخرة." },
+    price: 55,
+    catKey: "bakery",
+    tag: { en: "Fresh Baked", ar: "طازة يومياً" },
+    img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    id: 6,
+    name: { en: "San Sebastian Basque Cheesecake", ar: "سان سيباستيان تشيز كيك" },
+    desc: { en: "Caramelized crust with a molten creamy center, served with warm Belgian chocolate.", ar: "تشيز كيك كريمي مخبوز بحواف مكرملة مع صوص شوكولاتة بلجيكية." },
+    price: 90,
+    catKey: "bakery",
+    tag: { en: "Chef's Pick", ar: "حلى مميز" },
+    img: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=800&auto=format&fit=crop"
+  }
+];
+
+function renderMenu() {
+  const grid = document.getElementById('menuGrid');
+  const filtered = activeFilter === 'all' ? dishes : dishes.filter(d => d.catKey === activeFilter);
+  
+  grid.innerHTML = filtered.map(d => `
+    <div class="card-crema rounded-2xl overflow-hidden flex flex-col justify-between">
+      <div>
+        <div class="relative h-48 bg-gc-obsidian overflow-hidden">
+          <img src="${d.img}" alt="${d.name[currentLang]}" class="w-full h-full object-cover">
+          <span class="absolute top-3 right-3 rtl:right-auto rtl:left-3 px-2.5 py-1 rounded-lg bg-gc-obsidian/90 border border-gc-crema/40 text-gc-crema font-bold text-[11px]">
+            ${d.tag[currentLang]}
+          </span>
+        </div>
+        <div class="p-5 text-left rtl:text-right">
+          <div class="flex justify-between items-baseline mb-1.5">
+            <h3 class="title-font font-bold text-base text-gc-foam">${d.name[currentLang]}</h3>
+            <span class="title-font font-bold text-gc-crema text-sm">${d.price} EGP</span>
+          </div>
+          <p class="text-xs text-gc-dim leading-relaxed mb-4">${d.desc[currentLang]}</p>
+        </div>
+      </div>
+      <div class="p-5 pt-0">
+        <button onclick="addToCart(${d.id})" class="w-full py-3 rounded-xl bg-gc-roast border border-gc-border hover:border-gc-crema text-gc-foam font-bold text-xs flex items-center justify-center gap-2 transition">
+          <span>+</span> <span>${currentLang === 'en' ? 'Add to Order' : 'إضافة للطلب'}</span>
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderFilters() {
+  const row = document.getElementById('filterRow');
+  row.innerHTML = catOrder.map(cat => `
+    <button onclick="setFilter('${cat}')" class="px-4 py-2 rounded-xl text-xs font-bold transition border border-gc-border ${activeFilter === cat ? 'bg-gc-crema text-gc-obsidian border-gc-crema' : 'bg-gc-roast text-gc-dim hover:text-gc-foam'}">
+      ${cat === 'all' ? dict[currentLang].catAll : categories[cat][currentLang]}
+    </button>
+  `).join('');
+}
+
+function setFilter(cat) {
+  activeFilter = cat;
+  renderFilters();
+  renderMenu();
+}
+
+function addToCart(id) {
+  const item = dishes.find(d => d.id === id);
+  const found = cart.find(c => c.id === id);
+  if (found) found.qty++;
+  else cart.push({ ...item, qty: 1 });
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const count = cart.reduce((s, c) => s + c.qty, 0);
+  const subtotal = cart.reduce((s, c) => s + (c.price * c.qty), 0);
+  
+  document.getElementById('cartCount').textContent = count;
+  document.getElementById('mobileBarPrice').textContent = `${subtotal} EGP`;
+  
+  const container = document.getElementById('cartItems');
+  const footer = document.getElementById('cartFooter');
+  
+  if (cart.length === 0) {
+    container.innerHTML = `<div class="text-center py-12 text-gc-dim text-xs">${currentLang === 'en' ? 'Your cart is empty.' : 'طلبك فاضي لسه.'}</div>`;
+    footer.style.display = 'none';
+    return;
+  }
+  
+  footer.style.display = 'block';
+  document.getElementById('cartSubtotal').textContent = `${subtotal} EGP`;
+  
+  container.innerHTML = cart.map(c => `
+    <div class="p-3.5 rounded-2xl bg-gc-obsidian border border-gc-border flex items-center justify-between">
+      <div class="text-left rtl:text-right">
+        <div class="font-bold text-xs text-gc-foam">${c.name[currentLang]}</div>
+        <div class="text-[11px] text-gc-crema font-bold mt-0.5">${c.price} EGP × ${c.qty}</div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="changeQty(${c.id}, -1)" class="w-7 h-7 rounded-lg bg-gc-roast border border-gc-border text-gc-foam text-xs font-bold hover:border-gc-crema">-</button>
+        <span class="text-xs font-bold px-1">${c.qty}</span>
+        <button onclick="changeQty(${c.id}, 1)" class="w-7 h-7 rounded-lg bg-gc-roast border border-gc-border text-gc-foam text-xs font-bold hover:border-gc-crema">+</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(c => c.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(c => c.id !== id);
+  updateCartUI();
+}
+
+function toggleCart(open) {
+  const drawer = document.getElementById('cartDrawer');
+  const overlay = document.getElementById('cartOverlay');
+  if (open) {
+    drawer.classList.remove('translate-x-full', 'rtl:-translate-x-full');
+    overlay.classList.remove('opacity-0', 'pointer-events-none');
+  } else {
+    drawer.classList.add(currentLang === 'en' ? 'translate-x-full' : 'rtl:-translate-x-full');
+    overlay.classList.add('opacity-0', 'pointer-events-none');
+  }
+}
+
+function submitOrderViaWhatsApp() {
+  const subtotal = cart.reduce((s, c) => s + (c.price * c.qty), 0);
+  const items = cart.map(c => `• ${c.name[currentLang]} (x${c.qty}) - ${c.price * c.qty} EGP`).join('\n');
+  const msg = `*New Coffee Order · Gino Speciality Coffee*\n\n${items}\n\n*Total:* ${subtotal} EGP\n*Branch:* Alexandria`;
+  window.open(`https://wa.me/201006893004?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'ar' : 'en';
+  document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.className = currentLang === 'ar' ? 'lang-ar scroll-smooth' : 'scroll-smooth';
+  document.getElementById('langBtnLabel').textContent = currentLang === 'en' ? 'العربية' : 'English';
+  
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (dict[currentLang][k]) el.textContent = dict[currentLang][k];
+  });
+  
+  renderTicker();
+  renderFilters();
+  renderMenu();
+  updateCartUI();
+}
+
+function renderTicker() {
+  const row = document.getElementById('tickerRow');
+  const items = dict[currentLang].ticker;
+  row.innerHTML = [...items, ...items, ...items].map(t => `<span class="mx-6 flex items-center gap-2">☕ ${t}</span>`).join('');
+}
+
+// Forced Mobile Autoplay Engine
+const extractionVid = document.getElementById('coffeeExtractionVid');
+if (extractionVid) {
+  extractionVid.muted = true;
+  const playPromise = extractionVid.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(() => {
+      document.addEventListener('touchstart', () => extractionVid.play(), { once: true });
+      document.addEventListener('click', () => extractionVid.play(), { once: true });
+    });
+  }
+}
+
+renderTicker();
+renderFilters();
+renderMenu();
+updateCartUI();
+</script>
+</body>
+</html>
